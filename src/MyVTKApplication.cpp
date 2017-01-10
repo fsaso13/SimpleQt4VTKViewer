@@ -22,8 +22,8 @@
 
 #include "MainWindow.h"
 
-MyVTKApplication::MyVTKApplication(int& argc, char** argv, bool isGUI, int flags) :
-  QApplication(argc, argv, isGUI, flags)
+MyVTKApplication::MyVTKApplication(int& argc, char** argv, bool isGUI) :
+  QApplication(argc, argv, isGUI)
 {
   connect(
     this, SIGNAL(aboutToQuit()),

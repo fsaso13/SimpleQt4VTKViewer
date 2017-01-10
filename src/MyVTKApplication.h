@@ -28,7 +28,7 @@ class MyVTKApplication : public QApplication
 {
   Q_OBJECT
 public:
-  MyVTKApplication(int& argc, char** argv, bool isGUI = true, int = ApplicationFlags);
+  MyVTKApplication(int& argc, char** argv, bool isGUI = true);
   virtual ~MyVTKApplication();
 
 protected slots:
