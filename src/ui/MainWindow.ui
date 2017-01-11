@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>365</height>
+    <width>445</width>
+    <height>387</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,17 +16,7 @@
   <widget class="QWidget" name="m_centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QWidget" name="m_plotsWidget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QPushButton" name="m_addBtn">
         <property name="text">
@@ -87,6 +77,20 @@
       </item>
      </layout>
     </item>
+    <item>
+     <widget class="QWidget" name="m_plotsWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <zorder>horizontalSpacer</zorder>
+      <zorder>m_addBtn</zorder>
+      <zorder>m_removeBtn</zorder>
+      <zorder>horizontalSpacer</zorder>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -94,8 +98,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>19</height>
+     <width>445</width>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">

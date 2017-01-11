@@ -24,6 +24,7 @@
 #include <QWidget>
 
 #include <vtkSmartPointer.h>
+#include <vtkCamera.h>
 
 #include <memory>
 
@@ -39,7 +40,7 @@ public:
 	explicit PlotHD(QWidget *parent = 0);
 	virtual ~PlotHD();
 
-	void addGeometry(std::weak_ptr<Geometry> geom);
+    void addGeometry(std::weak_ptr<Geometry> geom, char const *texto);
 
 	bool checkPlotDeletion();
 
@@ -52,6 +53,7 @@ protected:
 
 	QVTKWidget2* m_renderWidget;
 	vtkSmartPointer<vtkRenderer> m_renderer;
+    //vtkSmartPointer<vtkCamera> algo;
 };
 
 #endif // PLOTHD_H

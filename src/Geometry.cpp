@@ -24,7 +24,8 @@
 #include <vtkPassThrough.h>
 #include <vtkPolyData.h>
 #include <vtkCubeSource.h>
-//#include <vtkSphereSource.h>
+#include <iostream>
+#include <vtkSphereSource.h>
 
 Geometry::Geometry(QObject *parent) : QObject(parent)
 {
@@ -33,37 +34,85 @@ Geometry::Geometry(QObject *parent) : QObject(parent)
 
 //  double center[3] = { -5.0, -5.0, 5.0 };
   double center[3] = { 0.0, 0.0, 0.0 };
-  m_data->ShallowCopy(CreateGeometryData(center));
+  int kek;
+  kek = 0;
+  m_data->ShallowCopy(CreateGeometryData(center, kek));
 
   m_inputFilter->SetInputData(m_data);
 }
 
-vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3])
+Geometry::Geometry(double center[3], int fig, QObject *parent) : QObject(parent) //which one of these is the function's input
+{
+  m_inputFilter = vtkSmartPointer<vtkPassThrough>::New();
+  m_data = vtkSmartPointer<vtkPolyData>::New();
+
+  //double center[3] = { -5.0, -5.0, 5.0 };
+  //gotta figuro out how to insert some variables there
+  //double center[3] = { 0.0, 0.0, 0.0 };         //initial coodinates for the figure's center
+  m_data->ShallowCopy(CreateGeometryData(center, fig));
+  std::cout << "hola mundo2" << std::endl;
+  int i;
+  for( i = 0; i < 3; i++){
+      std::cout << "center" << std::endl;
+      std::cout << center[i] << std::endl;
+  }
+  m_inputFilter->SetInputData(m_data);
+}
+
+Geometry::Geometry(Geometry&& geom) :
+  QObject(geom.parent()) //which one of these is the function's input
+{
+  m_inputFilter = vtkSmartPointer<vtkPassThrough>::New();
+  m_data = vtkSmartPointer<vtkPolyData>::New();
+  m_data->DeepCopy(geom.m_data);
+
+  std::cout << "hola mundo" << std::endl;
+
+  m_inputFilter->SetInputData(m_data);
+  m_inputFilter->Update();
+}
+
+vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int figure)
 {
   // Create a cube
-  vtkSmartPointer<vtkCubeSource> cubeSource =
-    vtkSmartPointer<vtkCubeSource>::New();
-  cubeSource->SetCenter(center);
-  cubeSource->SetBounds(
-    -0.5, 0.5,
-    -0.5, 0.5,
-    -0.5, 0.5);
+  int i;
+  for( i = 0; i < 3; i++){
+      std::cout << "center kek" << std::endl;
+      std::cout << center[i] << std::endl;
+  }
+  if (figure == 0){
+      vtkSmartPointer<vtkCubeSource> fsource =
+        vtkSmartPointer<vtkCubeSource>::New();
+      fsource->SetCenter(center);
+      fsource->SetBounds(
+        -0.5, 0.5,
+        -0.5, 0.5,
+        -0.5, 0.5);
+      fsource->Update();
+      vtkSmartPointer<vtkPolyData> data =
+        vtkSmartPointer<vtkPolyData>::New();
 
+      data->ShallowCopy(fsource->GetOutput());
+      std::cout << "center> " << fsource->GetCenter()[0] << ", " << fsource->GetCenter()[1] << ", " << fsource->GetCenter()[2] << ", " << std::endl;
+      return data;
+  }
+  else if (figure == 1){
 //  // Create a sphere
-//  vtkSmartPointer<vtkCubeSource> cubeSource =
-//    vtkSmartPointer<vtkCubeSource>::New();
-//  sphereSource->SetRadius(3.0);
-//  sphereSource->SetPhiResolution(20);
-//  sphereSource->SetThetaResolution(20);
+    vtkSmartPointer<vtkSphereSource> fsource =
+    vtkSmartPointer<vtkSphereSource>::New();
+    fsource->SetRadius(0.5);
+    fsource->SetPhiResolution(20);
+    fsource->SetThetaResolution(20);
+    fsource->Update();
+    vtkSmartPointer<vtkPolyData> data =
+      vtkSmartPointer<vtkPolyData>::New();
 
-  cubeSource->Update();
-
-  vtkSmartPointer<vtkPolyData> data =
-    vtkSmartPointer<vtkPolyData>::New();
-
-  data->ShallowCopy(cubeSource->GetOutput());
-  return data;
+    data->ShallowCopy(fsource->GetOutput());
+    std::cout << fsource->GetCenter() << std::endl;
+    return data;
+    }
 }
+
 
 vtkAlgorithmOutput* Geometry::getGeometryConection()
 {
@@ -80,5 +129,5 @@ vtkPolyData* Geometry::getGeometryData()
 
 void Geometry::setNewCenter(double center[3])
 {
-  m_data->ShallowCopy(CreateGeometryData(center));
+  m_data->ShallowCopy(CreateGeometryData(center, 0));
 }

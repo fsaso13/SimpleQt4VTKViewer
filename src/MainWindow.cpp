@@ -34,6 +34,8 @@
 #include "AboutDialog.h"
 #include "Geometry.h"
 #include "PlotHD.h"
+#include "ParamsDialog.h"
+
 
 MainWindow* MainWindow::m_winInstance = nullptr;
 
@@ -87,8 +89,11 @@ void MainWindow::addPlot()
   {
     addGeometry();
   }
-
-  m_plotList.last()->addGeometry(m_geomList.last());
+  int indice;
+  indice = m_plotList.size();
+  std::string s = std::to_string(indice);
+  char const *pchar = s.c_str();
+  m_plotList.last()->addGeometry(m_geomList.last(), pchar);
 
 //  vtkDebugLeaks::PrintCurrentLeaks();
 }
@@ -109,7 +114,19 @@ void MainWindow::removePlot()
 
 void MainWindow::addGeometry()
 {
-  m_geomList.append(std::make_shared<Geometry>(this));
+  ParamsDialog params;
+  params.exec();
+  double* kek;
+  kek = params.getCenter();
+  int fig;
+  fig = params.getFigure();
+  int i;
+  for( i = 0; i < 3; i++){
+      std::cout << "kek" << std::endl;
+      std::cout << kek[i] << std::endl;
+  }
+
+  m_geomList.append(std::make_shared<Geometry>(kek,fig,this));
 
 //  vtkDebugLeaks::PrintCurrentLeaks();
 }
@@ -180,7 +197,17 @@ void MainWindow::removeAllGeometries()
 
 void MainWindow::showAboutDialog()
 {
-  AboutDialog* dialog = new AboutDialog();
-  dialog->setModal(true);
-  dialog->show();
+//  AboutDialog* dialog = new AboutDialog();
+  AboutDialog dialog;
+  dialog.setModal(true);
+  if( dialog.exec() == QDialog::Accepted )
+  {
+    std::cout << dialog.getLabelText().toStdString() << std::endl;
+  }
+//  dialog->show();
+}
+
+void MainWindow::showTextline(){
+    //std::cout << m_ui->m_field1->text().toStdString() <<std::endl;
+    //m_ui->m_field1->setText("nope");
 }

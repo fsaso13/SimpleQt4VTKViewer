@@ -35,6 +35,8 @@ public:
   explicit AboutDialog(QWidget *parent = 0);
   ~AboutDialog();
 
+  const QString& getLabelText() const;
+
 private:
   Ui::AboutDialog *ui;
 };

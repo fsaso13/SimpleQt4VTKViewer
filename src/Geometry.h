@@ -31,24 +31,27 @@ class vtkPassThrough;
 
 class Geometry : public QObject
 {
-  Q_OBJECT
+        Q_OBJECT
 public:
-  explicit Geometry(QObject *parent = 0);
+        explicit Geometry(QObject *parent = 0);
+        Geometry(double center[3], int fig, QObject *parent);
+        Geometry(Geometry&& geom);
 
-  vtkAlgorithmOutput* getGeometryConection();
-  vtkPolyData* getGeometryData();
+        vtkAlgorithmOutput* getGeometryConection();
+        vtkPolyData* getGeometryData();
 
-  void setNewCenter(double center[3]);
+        void setNewCenter(double center[3]);
 
 signals:
 
 public slots:
 
 protected:
-  static vtkSmartPointer<vtkPolyData> CreateGeometryData(double center[3]);
+        static vtkSmartPointer<vtkPolyData> CreateGeometryData(double center[3], int figure);
+       // static vtkSmartPointer<vtkPolyData> CreateGeometryData(double center[3]);
 
-  vtkSmartPointer<vtkPolyData>    m_data;
-  vtkSmartPointer<vtkPassThrough> m_inputFilter;
+        vtkSmartPointer<vtkPolyData>    m_data;
+        vtkSmartPointer<vtkPassThrough> m_inputFilter;
 };
 
 #endif // GEOMETRY_H

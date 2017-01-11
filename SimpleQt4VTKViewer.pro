@@ -23,7 +23,7 @@
 #-------------------------------------------------
 
 QT       += core gui opengl
-
+CONFIG += uitools
 TARGET = simple-qt-viewer
 TEMPLATE = app
 
@@ -38,18 +38,26 @@ SOURCES += \
   ./src/PlotHD.cpp \
   ./src/Geometry.cpp \
   ./src/MyVTKApplication.cpp \
-  ./src/AboutDialog.cpp
+  ./src/AboutDialog.cpp \
+    src/ParamsDialog.cpp \
+    #src/ui/paramsdialog.cpp
+    ParamsDialog2.cpp
 
 HEADERS  += \
   ./src/MainWindow.h \
   ./src/PlotHD.h \
   ./src/Geometry.h \
   ./src/MyVTKApplication.h \
-  ./src/AboutDialog.h
+  ./src/AboutDialog.h \
+    src/ParamsDialog.h \
+    #src/ui/paramsdialog.h
+    ParamsDialog2.h
 
 FORMS    += \
   ./src/ui/MainWindow.ui \
-  ./src/ui/AboutDialog.ui
+  ./src/ui/AboutDialog.ui \
+    src/ui/ParamsDialog.ui \
+    ParamsDialog2.ui
 
 INCLUDEPATH += \
   $$(VTK_7_INCLUDE_PATH)
@@ -78,7 +86,10 @@ LIBS += \
   -lvtkImagingCore-7.1 \
   -lvtkImagingFourier-7.1 \
   -lvtkInteractionStyle-7.1 \
+  -lvtkInteractionWidgets-7.1 \
+  -lvtkRenderingAnnotation-7.1 \
   -lvtkRenderingCore-7.1 \
+  -lvtkRenderingFreeType-7.1 \
   -lvtkRenderingOpenGL2-7.1 \
   -lvtkalglib-7.1 \
   -lvtkglew-7.1 \
@@ -88,3 +99,7 @@ LIBS += \
   -lvtksys-7.1 \
   -lvtktiff-7.1 \
   -lvtkzlib-7.1
+
+DISTFILES += \
+    src/ui/ParamsDialogForm.ui.qml \
+    src/ui/ParamsDialog.qml

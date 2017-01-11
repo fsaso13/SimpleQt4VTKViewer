@@ -32,3 +32,8 @@ AboutDialog::~AboutDialog()
 {
   delete ui;
 }
+
+const QString& AboutDialog::getLabelText() const
+{
+  ui->label->text();
+}

@@ -50,6 +50,7 @@ protected slots:
   void addGeometry();
   void removeGeometry();
   void showAboutDialog();
+  void showTextline();
 
 protected:
   MainWindow(QWidget* parent = 0);

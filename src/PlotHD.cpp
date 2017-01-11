@@ -32,17 +32,23 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
+#include <vtkTextActor.h>
+#include <vtkTextProperty.h>
+#include "vtkCubeAxesActor.h"
 
 #include <QVTKWidget2.h>
-
+#include <vtkCamera.h>
 #include <QApplication>
 #include <QVBoxLayout>
 
 #include "Geometry.h"
 #include "MainWindow.h"
+#include "./ParamsDialog2.h"
+
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2)
 VTK_MODULE_INIT(vtkInteractionStyle)
+VTK_MODULE_INIT(vtkRenderingFreeType)
 
 PlotHD::PlotHD(QWidget *parent) : QWidget(parent)
 {
@@ -50,11 +56,14 @@ PlotHD::PlotHD(QWidget *parent) : QWidget(parent)
   m_renderWidget = new QVTKWidget2(this);
   m_renderWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+  //algo = vtkSmartPointer<vtkCamera>::New();
+  //algo->SetPosition(0,0,0);
   m_renderer = vtkSmartPointer<vtkRenderer>::New();
-  m_renderer->SetBackground(1, .714, .757); // Background color green ffb6c1
+  m_renderer->SetBackground(0, 1, 0); // Background color green ffb6c1
+  //m_renderer->SetActiveCamera(algo);
 
   lay->addWidget(m_renderWidget);
-  lay->setContentsMargins(0, 0, 0, 0);
+  lay->setContentsMargins(0,0,0,0);
 
   m_renderWidget->GetRenderWindow()->AddRenderer(m_renderer);
 }
@@ -63,11 +72,18 @@ PlotHD::~PlotHD()
 {
 }
 
-void PlotHD::addGeometry(std::weak_ptr<Geometry> geom)
+void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *texto)
 {
   if( auto validGeom = geom.lock() )
   {
     m_geom = geom;
+    //double* algo;
+    //algo = geom.g
+
+    ParamsDialog2 params2;
+    params2.exec();
+    double* kek2;
+    kek2 = params2.getColor();
 
     vtkSmartPointer<vtkPolyDataMapper> mapper =
       vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -76,9 +92,23 @@ void PlotHD::addGeometry(std::weak_ptr<Geometry> geom)
     vtkSmartPointer<vtkActor> actor =
       vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
-    actor->GetProperty()->SetColor(0.0, 0.0, 1.0);
 
+    vtkSmartPointer<vtkTextActor> txt = vtkSmartPointer<vtkTextActor>::New();
+    txt->SetInput(texto);
+    txt->SetPosition2(10,40);
+    txt->GetTextProperty()->SetFontSize(24);
+
+    actor->GetProperty()->SetColor(kek2[0], kek2[1], kek2[2]);
+
+    vtkSmartPointer<vtkCubeAxesActor> axes=vtkSmartPointer<vtkCubeAxesActor> ::New();
+    axes->SetCamera(m_renderer->GetActiveCamera());
+    m_renderer->AddViewProp( axes.GetPointer()) ;
+
+    m_renderer->AddActor2D(txt);
     m_renderer->AddActor(actor);
+
+    m_renderer->ResetCamera();
+    m_renderWidget->update();
   }
 }
 
