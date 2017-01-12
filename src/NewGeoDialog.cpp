@@ -1,4 +1,4 @@
-#include "ParamsDialog.h"
+#include "NewGeoDialog.h"
 #include "ui_ParamsDialog.h"
 //#include <QtUiTools/QUiLoader>
 #include <QtUiTools>
@@ -32,7 +32,7 @@ void ParamsDialog::setParams(){
     int i;
     std::cout << this->figure << std::endl;
     for( i = 0; i < 3; i++){
-        std::cout << "kek" << std::endl;
+        qDebug() << "Color";
         std::cout << this->center[i] << std::endl;
     }
     this->close();
