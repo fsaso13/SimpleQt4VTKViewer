@@ -1,10 +1,11 @@
-#include "ParamsDialog2.h"
+#include "ColorDialog.h"
 #include "ui_ParamsDialog2.h"
 #include <QtUiTools>
 #include <QFile>
 #include <QVBoxLayout>
 #include <string.h>
 #include <iostream>
+#include <QDebug>
 
 
 ParamsDialog2::ParamsDialog2(QWidget *parent) :
@@ -26,7 +27,7 @@ void ParamsDialog2::setParams(){
     this->color[2] = m_ui->m_b->text().toDouble();
     int i;
     for( i = 0; i < 3; i++){
-        std::cout << "kek" << std::endl;
+        qDebug() << "Color" ;
         std::cout << this->color[i] << std::endl;
     }
     this->close();
