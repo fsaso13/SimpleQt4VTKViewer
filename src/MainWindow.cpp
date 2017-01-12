@@ -67,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->action_About, SIGNAL(triggered(bool)),
     this,               SLOT(showAboutDialog()));
 
+  connect(
+    m_ui->m_fig2plot, SIGNAL(pressed()),
+    this,               SLOT(addFig2Plot()));
+
   m_geomList.append(std::make_shared<Geometry>(this));
 
   addPlot();
@@ -208,7 +212,28 @@ void MainWindow::showAboutDialog()
 //  dialog->show();
 }
 
-void MainWindow::showTextline(){
+void MainWindow::showTextline()
+{
     //std::cout << m_ui->m_field1->text().toStdString() <<std::endl;
     //m_ui->m_field1->setText("nope");
+}
+
+void MainWindow::addFig2Plot()
+{
+    NewGeoDialog params;
+    params.exec();
+    double* center;
+    center = params.getCenter();
+    int fig;
+    fig = params.getFigure();
+    int i;
+    for( i = 0; i < 3; i++)
+    {
+        std::cout << "Center" << std::endl;
+        std::cout << center[i] << std::endl;
+    }
+
+    m_geomList.append(std::make_shared<Geometry>(center,fig,this));
+    m_plotList.last()->addGeometry(m_geomList.last());
+
 }

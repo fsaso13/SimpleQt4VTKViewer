@@ -26,6 +26,7 @@
 #include <vtkCubeSource.h>
 #include <iostream>
 #include <vtkSphereSource.h>
+#include <vtkConeSource.h>
 
 Geometry::Geometry(QObject *parent) : QObject(parent)
 {
@@ -69,7 +70,9 @@ Geometry::Geometry(Geometry&& geom) :
   m_inputFilter->Update();
 }
 
-vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int figure)
+vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(
+  double center[3],
+  int figure)
 {
   // Create a cube
   int i;
@@ -82,11 +85,11 @@ vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int 
   {
       vtkSmartPointer<vtkCubeSource> fsource =
         vtkSmartPointer<vtkCubeSource>::New();
-      fsource->SetCenter(center);
       fsource->SetBounds(
         -0.5, 0.5,
         -0.5, 0.5,
         -0.5, 0.5);
+      fsource->SetCenter(center);
       fsource->Update();
       vtkSmartPointer<vtkPolyData> data =
         vtkSmartPointer<vtkPolyData>::New();
@@ -103,6 +106,7 @@ vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int 
     fsource->SetRadius(0.5);
     fsource->SetPhiResolution(20);
     fsource->SetThetaResolution(20);
+    fsource->SetCenter(center);
     fsource->Update();
     vtkSmartPointer<vtkPolyData> data =
       vtkSmartPointer<vtkPolyData>::New();
@@ -111,6 +115,22 @@ vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int 
     std::cout << fsource->GetCenter() << std::endl;
     return data;
     }
+  else if (figure == 2)
+  {
+    vtkSmartPointer<vtkConeSource> fsource =
+    vtkSmartPointer<vtkConeSource>::New();
+    fsource->SetRadius(0.5);
+    //fsource->SetPhiResolution(20);
+    fsource->SetHeight(1);
+    //fsource->SetThetaResolution(20);
+    fsource->SetCenter(center);
+    fsource->Update();
+    vtkSmartPointer<vtkPolyData> data =
+      vtkSmartPointer<vtkPolyData>::New();
+    data->ShallowCopy(fsource->GetOutput());
+    std::cout << fsource->GetCenter() << std::endl;
+    return data;
+  }
 }
 
 

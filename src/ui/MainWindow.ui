@@ -16,6 +16,13 @@
   <widget class="QWidget" name="m_centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <widget class="QPushButton" name="m_fig2plot">
+      <property name="text">
+       <string>Add Figure to Plot</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QPushButton" name="m_addBtn">
@@ -85,10 +92,6 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <zorder>horizontalSpacer</zorder>
-      <zorder>m_addBtn</zorder>
-      <zorder>m_removeBtn</zorder>
-      <zorder>horizontalSpacer</zorder>
      </widget>
     </item>
    </layout>

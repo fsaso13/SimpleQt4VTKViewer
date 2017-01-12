@@ -40,10 +40,11 @@
 #include <vtkCamera.h>
 #include <QApplication>
 #include <QVBoxLayout>
+#include <QtGui>
 
 #include "Geometry.h"
 #include "MainWindow.h"
-#include "./ColorDialog.h"
+#include "ColorDialog.h"
 
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2)
@@ -72,6 +73,62 @@ PlotHD::~PlotHD()
 {
 }
 
+void PlotHD::addGeometry(std::weak_ptr<Geometry> geom)
+{
+  if( auto validGeom = geom.lock() )
+  {
+    m_geom = geom;
+    //double* algo;
+    //algo = geom.g
+
+    //ColorDialog params2;
+    //params2.exec();
+    //double* color;
+    //color = params2.getColor();
+
+    QColor ccolor = QColorDialog::getColor(Qt::yellow, this );
+    if( ccolor.isValid() )
+    {
+        qDebug() << "Color Choosen : " << ccolor.name();
+    }
+    //this->color[0] = ccolor.redF();
+    //this->color[1] = ccolor.greenF();
+    //this->color[2] = ccolor.blueF();
+    //int i;
+    //for( i = 0; i < 3; i++)
+    //{
+    //   qDebug() << "Color" ;
+    //    std::cout << this->color[i] << std::endl;
+    //}
+
+    vtkSmartPointer<vtkPolyDataMapper> mapper =
+      vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapper->SetInputConnection(validGeom->getGeometryConection());
+
+    vtkSmartPointer<vtkActor> actor =
+      vtkSmartPointer<vtkActor>::New();
+    actor->SetMapper(mapper);
+
+    //vtkSmartPointer<vtkTextActor> txt = vtkSmartPointer<vtkTextActor>::New();
+    //txt->SetInput(text);
+    //txt->SetPosition2(10,40);
+    //txt->GetTextProperty()->SetFontSize(24);
+
+    actor->GetProperty()->SetColor(ccolor.redF(),ccolor.greenF(), ccolor.blueF());
+
+    //vtkSmartPointer<vtkCubeAxesActor> axes=vtkSmartPointer<vtkCubeAxesActor> ::New();
+    //axes->SetCamera(m_renderer->GetActiveCamera());
+    //m_renderer->AddViewProp( axes.GetPointer()) ;
+
+    //m_renderer->AddActor2D(txt);
+    m_renderer->AddActor(actor);
+
+    m_renderer->ResetCamera();
+    m_renderWidget->update();
+  }
+}
+
+
 void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *text)
 {
   if( auto validGeom = geom.lock() )
@@ -80,10 +137,25 @@ void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *text)
     //double* algo;
     //algo = geom.g
 
-    ColorDialog params2;
-    params2.exec();
-    double* color;
-    color = params2.getColor();
+    //ColorDialog params2;
+    //params2.exec();
+    //double* color;
+    //color = params2.getColor();
+
+    QColor ccolor = QColorDialog::getColor(Qt::yellow, this );
+    if( ccolor.isValid() )
+    {
+        qDebug() << "Color Choosen : " << ccolor.name();
+    }
+    //this->color[0] = ccolor.redF();
+    //this->color[1] = ccolor.greenF();
+    //this->color[2] = ccolor.blueF();
+    //int i;
+    //for( i = 0; i < 3; i++)
+    //{
+    //   qDebug() << "Color" ;
+    //    std::cout << this->color[i] << std::endl;
+    //}
 
     vtkSmartPointer<vtkPolyDataMapper> mapper =
       vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -98,7 +170,7 @@ void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *text)
     txt->SetPosition2(10,40);
     txt->GetTextProperty()->SetFontSize(24);
 
-    actor->GetProperty()->SetColor(color[0], color[1], color[2]);
+    actor->GetProperty()->SetColor(ccolor.redF(),ccolor.greenF(), ccolor.blueF());
 
     vtkSmartPointer<vtkCubeAxesActor> axes=vtkSmartPointer<vtkCubeAxesActor> ::New();
     axes->SetCamera(m_renderer->GetActiveCamera());

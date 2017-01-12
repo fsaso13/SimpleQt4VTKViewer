@@ -41,6 +41,7 @@ public:
 	virtual ~PlotHD();
 
     void addGeometry(std::weak_ptr<Geometry> geom, char const *text);
+    void addGeometry(std::weak_ptr<Geometry> geom);
 
 	bool checkPlotDeletion();
 
