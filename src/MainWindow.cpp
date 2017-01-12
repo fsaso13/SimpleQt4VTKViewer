@@ -34,7 +34,7 @@
 #include "AboutDialog.h"
 #include "Geometry.h"
 #include "PlotHD.h"
-#include "ParamsDialog.h"
+#include "NewGeoDialog.h"
 
 
 MainWindow* MainWindow::m_winInstance = nullptr;
@@ -116,17 +116,17 @@ void MainWindow::addGeometry()
 {
   ParamsDialog params;
   params.exec();
-  double* kek;
-  kek = params.getCenter();
+  double* center;
+  center = params.getCenter();
   int fig;
   fig = params.getFigure();
   int i;
   for( i = 0; i < 3; i++){
-      std::cout << "kek" << std::endl;
-      std::cout << kek[i] << std::endl;
+      std::cout << "Center" << std::endl;
+      std::cout << center[i] << std::endl;
   }
 
-  m_geomList.append(std::make_shared<Geometry>(kek,fig,this));
+  m_geomList.append(std::make_shared<Geometry>(center,fig,this));
 
 //  vtkDebugLeaks::PrintCurrentLeaks();
 }

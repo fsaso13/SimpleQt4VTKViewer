@@ -43,7 +43,7 @@
 
 #include "Geometry.h"
 #include "MainWindow.h"
-#include "./ParamsDialog2.h"
+#include "./ColorDialog.h"
 
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2)
@@ -72,7 +72,7 @@ PlotHD::~PlotHD()
 {
 }
 
-void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *texto)
+void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *text)
 {
   if( auto validGeom = geom.lock() )
   {
@@ -82,8 +82,8 @@ void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *texto)
 
     ParamsDialog2 params2;
     params2.exec();
-    double* kek2;
-    kek2 = params2.getColor();
+    double* color;
+    color = params2.getColor();
 
     vtkSmartPointer<vtkPolyDataMapper> mapper =
       vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -94,11 +94,11 @@ void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *texto)
     actor->SetMapper(mapper);
 
     vtkSmartPointer<vtkTextActor> txt = vtkSmartPointer<vtkTextActor>::New();
-    txt->SetInput(texto);
+    txt->SetInput(text);
     txt->SetPosition2(10,40);
     txt->GetTextProperty()->SetFontSize(24);
 
-    actor->GetProperty()->SetColor(kek2[0], kek2[1], kek2[2]);
+    actor->GetProperty()->SetColor(color[0], color[1], color[2]);
 
     vtkSmartPointer<vtkCubeAxesActor> axes=vtkSmartPointer<vtkCubeAxesActor> ::New();
     axes->SetCamera(m_renderer->GetActiveCamera());

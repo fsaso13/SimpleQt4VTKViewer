@@ -20,7 +20,7 @@
 
 #include "MainWindow.h"
 #include "MyVTKApplication.h"
-#include "ParamsDialog.h"
+#include "NewGeoDialog.h"
 int main(int argc, char** argv)
 {
   MyVTKApplication a(argc, argv);

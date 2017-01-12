@@ -39,9 +39,9 @@ SOURCES += \
   ./src/Geometry.cpp \
   ./src/MyVTKApplication.cpp \
   ./src/AboutDialog.cpp \
-    src/ParamsDialog.cpp \
+    ColorDialog.cpp \
+  ./src/NewGeoDialog.cpp
     #src/ui/paramsdialog.cpp
-    ParamsDialog2.cpp
 
 HEADERS  += \
   ./src/MainWindow.h \
@@ -49,9 +49,9 @@ HEADERS  += \
   ./src/Geometry.h \
   ./src/MyVTKApplication.h \
   ./src/AboutDialog.h \
-    src/ParamsDialog.h \
+    ColorDialog.h \
+  ./src/NewGeoDialog.h
     #src/ui/paramsdialog.h
-    ParamsDialog2.h
 
 FORMS    += \
   ./src/ui/MainWindow.ui \
@@ -100,6 +100,3 @@ LIBS += \
   -lvtktiff-7.1 \
   -lvtkzlib-7.1
 
-DISTFILES += \
-    src/ui/ParamsDialogForm.ui.qml \
-    src/ui/ParamsDialog.qml

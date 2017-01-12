@@ -34,9 +34,9 @@ Geometry::Geometry(QObject *parent) : QObject(parent)
 
 //  double center[3] = { -5.0, -5.0, 5.0 };
   double center[3] = { 0.0, 0.0, 0.0 };
-  int kek;
-  kek = 0;
-  m_data->ShallowCopy(CreateGeometryData(center, kek));
+  int default_fig;
+  default_fig = 0;
+  m_data->ShallowCopy(CreateGeometryData(center, default_fig));
 
   m_inputFilter->SetInputData(m_data);
 }
@@ -50,7 +50,6 @@ Geometry::Geometry(double center[3], int fig, QObject *parent) : QObject(parent)
   //gotta figuro out how to insert some variables there
   //double center[3] = { 0.0, 0.0, 0.0 };         //initial coodinates for the figure's center
   m_data->ShallowCopy(CreateGeometryData(center, fig));
-  std::cout << "hola mundo2" << std::endl;
   int i;
   for( i = 0; i < 3; i++){
       std::cout << "center" << std::endl;
@@ -66,8 +65,6 @@ Geometry::Geometry(Geometry&& geom) :
   m_data = vtkSmartPointer<vtkPolyData>::New();
   m_data->DeepCopy(geom.m_data);
 
-  std::cout << "hola mundo" << std::endl;
-
   m_inputFilter->SetInputData(m_data);
   m_inputFilter->Update();
 }
@@ -77,7 +74,7 @@ vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int 
   // Create a cube
   int i;
   for( i = 0; i < 3; i++){
-      std::cout << "center kek" << std::endl;
+      std::cout << "Center" << std::endl;
       std::cout << center[i] << std::endl;
   }
   if (figure == 0){

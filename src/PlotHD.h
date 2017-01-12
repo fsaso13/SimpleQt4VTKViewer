@@ -40,7 +40,7 @@ public:
 	explicit PlotHD(QWidget *parent = 0);
 	virtual ~PlotHD();
 
-    void addGeometry(std::weak_ptr<Geometry> geom, char const *texto);
+    void addGeometry(std::weak_ptr<Geometry> geom, char const *text);
 
 	bool checkPlotDeletion();
 
