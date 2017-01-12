@@ -1,20 +1,20 @@
-#ifndef PARAMSDIALOG2_H
-#define PARAMSDIALOG2_H
+#ifndef COLORDIALOG_H
+#define COLORDIALOG_H
 
 #include <QDialog>
 
 namespace Ui {
-class ParamsDialog2;
+class ColorDialog;
 }
 
-class ParamsDialog2 : public QDialog
+class ColorDialog : public QDialog
 {
     Q_OBJECT
     double color[3];
 
 public:
-    explicit ParamsDialog2(QWidget *parent = 0);
-    ~ParamsDialog2();
+    explicit ColorDialog(QWidget *parent = 0);
+    ~ColorDialog();
 
 public slots:
     double* getColor();
@@ -24,7 +24,7 @@ protected slots:
     void setParams();
 
 private:
-    Ui::ParamsDialog2 *m_ui;
+    Ui::ColorDialog *m_ui;
 };
 
-#endif // PARAMSDIALOG2_H
+#endif // COLORDIALOG_H

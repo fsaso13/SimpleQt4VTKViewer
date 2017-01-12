@@ -114,14 +114,15 @@ void MainWindow::removePlot()
 
 void MainWindow::addGeometry()
 {
-  ParamsDialog params;
+  NewGeoDialog params;
   params.exec();
   double* center;
   center = params.getCenter();
   int fig;
   fig = params.getFigure();
   int i;
-  for( i = 0; i < 3; i++){
+  for( i = 0; i < 3; i++)
+  {
       std::cout << "Center" << std::endl;
       std::cout << center[i] << std::endl;
   }

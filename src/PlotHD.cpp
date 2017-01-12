@@ -80,7 +80,7 @@ void PlotHD::addGeometry(std::weak_ptr<Geometry> geom, char const *text)
     //double* algo;
     //algo = geom.g
 
-    ParamsDialog2 params2;
+    ColorDialog params2;
     params2.exec();
     double* color;
     color = params2.getColor();

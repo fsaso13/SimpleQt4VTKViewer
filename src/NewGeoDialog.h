@@ -1,22 +1,22 @@
-#ifndef PARAMSDIALOG_H
-#define PARAMSDIALOG_H
+#ifndef NEWGEODIALOG_H
+#define NEWGEODIALOG_H
 
 
 #include <QDialog>
 
 namespace Ui {
-    class ParamsDialog;
+    class NewGeoDialog;
 }
 
-class ParamsDialog : public QDialog
+class NewGeoDialog : public QDialog
 {
     Q_OBJECT
     double center[3];
     int figure;
 
 public:
-    explicit ParamsDialog(QWidget *parent = 0);
-    ~ParamsDialog();
+    explicit NewGeoDialog(QWidget *parent = 0);
+    ~NewGeoDialog();
 
 public slots:
     double* getCenter();
@@ -28,8 +28,8 @@ protected slots:
 
 
 private:
-    Ui::ParamsDialog *m_ui;
+    Ui::NewGeoDialog *m_ui;
 
 };
 
-#endif // PARAMSDIALOG_H
+#endif // NEWGEODIALOG_H

@@ -73,11 +73,13 @@ vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int 
 {
   // Create a cube
   int i;
-  for( i = 0; i < 3; i++){
+  for( i = 0; i < 3; i++)
+  {
       std::cout << "Center" << std::endl;
       std::cout << center[i] << std::endl;
   }
-  if (figure == 0){
+  if (figure == 0)
+  {
       vtkSmartPointer<vtkCubeSource> fsource =
         vtkSmartPointer<vtkCubeSource>::New();
       fsource->SetCenter(center);
@@ -93,7 +95,8 @@ vtkSmartPointer<vtkPolyData> Geometry::CreateGeometryData(double center[3], int 
       std::cout << "center> " << fsource->GetCenter()[0] << ", " << fsource->GetCenter()[1] << ", " << fsource->GetCenter()[2] << ", " << std::endl;
       return data;
   }
-  else if (figure == 1){
+  else if (figure == 1)
+  {
 //  // Create a sphere
     vtkSmartPointer<vtkSphereSource> fsource =
     vtkSmartPointer<vtkSphereSource>::New();

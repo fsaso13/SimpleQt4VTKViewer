@@ -56,8 +56,8 @@ HEADERS  += \
 FORMS    += \
   ./src/ui/MainWindow.ui \
   ./src/ui/AboutDialog.ui \
-    src/ui/ParamsDialog.ui \
-    ParamsDialog2.ui
+    src/ui/NewGeoDialog.ui \
+    ColorDialog.ui
 
 INCLUDEPATH += \
   $$(VTK_7_INCLUDE_PATH)
