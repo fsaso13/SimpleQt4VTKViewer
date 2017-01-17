@@ -47,7 +47,7 @@
 
 #include "Geometry.h"
 #include "MainWindow.h"
-#include "ColorDialog.h"
+
 
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2)

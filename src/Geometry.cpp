@@ -40,6 +40,7 @@
 #include "vtkRenderWindowInteractor.h"
 #include "vtkUnstructuredGrid.h"
 #include "vtkDataSetSurfaceFilter.h"
+#include <QDebug>
 
 
 Geometry::Geometry(QObject *parent) : QObject(parent)
@@ -49,7 +50,7 @@ Geometry::Geometry(QObject *parent) : QObject(parent)
 
   double center[3] = { 0.0, 0.0, 0.0 };
   int m_defaultFig;
-  default_fig = 0;
+  m_defaultFig = 0;
   m_data->ShallowCopy(CreateGeometryData(center, m_defaultFig));
 
   m_inputFilter->SetInputData(m_data);

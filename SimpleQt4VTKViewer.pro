@@ -59,7 +59,7 @@ FORMS    += \
   ./src/ui/MainWindow.ui \
   ./src/ui/AboutDialog.ui \
   ./src/ui/NewGeoDialog.ui \
-  ./src/ui/ColorDialog.ui
+  #./src/ui/ColorDialog.ui
 
 INCLUDEPATH += \
   $$(VTK_7_INCLUDE_PATH)
