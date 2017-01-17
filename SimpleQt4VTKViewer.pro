@@ -39,8 +39,9 @@ SOURCES += \
   ./src/Geometry.cpp \
   ./src/MyVTKApplication.cpp \
   ./src/AboutDialog.cpp \
-  ./src/ColorDialog.cpp \
-  ./src/NewGeoDialog.cpp
+  #/src/ColorDialog.cpp \
+  ./src/NewGeoDialog.cpp \
+  #./src/CustomCube.cpp
     #src/ui/paramsdialog.cpp
 
 HEADERS  += \
@@ -49,8 +50,9 @@ HEADERS  += \
   ./src/Geometry.h \
   ./src/MyVTKApplication.h \
   ./src/AboutDialog.h \
-  ./src/ColorDialog.h \
-  ./src/NewGeoDialog.h
+  #/src/ColorDialog.h \
+  ./src/NewGeoDialog.h \
+  #./src/CustomCube.h
     #src/ui/paramsdialog.h
 
 FORMS    += \

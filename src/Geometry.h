@@ -48,7 +48,6 @@ public slots:
 
 protected:
         static vtkSmartPointer<vtkPolyData> CreateGeometryData(double center[3], int figure);
-       // static vtkSmartPointer<vtkPolyData> CreateGeometryData(double center[3]);
 
         vtkSmartPointer<vtkPolyData>    m_data;
         vtkSmartPointer<vtkPassThrough> m_inputFilter;

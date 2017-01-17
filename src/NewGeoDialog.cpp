@@ -1,6 +1,5 @@
 #include "NewGeoDialog.h"
 #include "ui_NewGeoDialog.h"
-//#include <QtUiTools/QUiLoader>
 #include <QtUiTools>
 #include <QFile>
 #include <QVBoxLayout>
@@ -37,7 +36,7 @@ void NewGeoDialog::setParams()
     for( i = 0; i < 3; i++)
     {
         qDebug() << "Color";
-        std::cout << this->center[i] << std::endl;
+        qDebug() << this->center[i];
     }
     this->close();
 }
