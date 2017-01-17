@@ -54,7 +54,6 @@ protected:
 
 	QVTKWidget2* m_renderWidget;
 	vtkSmartPointer<vtkRenderer> m_renderer;
-    //vtkSmartPointer<vtkCamera> algo;
 };
 
 #endif // PLOTHD_H

@@ -25,14 +25,7 @@ int main(int argc, char** argv)
 {
   MyVTKApplication a(argc, argv);
 
-//  MyDialog dialog;
-//  dialog.exec();
-//  ParamsDialog params;
-//  params.exec();
-
   MainWindow& w = MainWindow::GetWindowInstance();
-//  w.setbackground(dalog.getbackgroundcolor());
-//  ...
 
   w.show();
 

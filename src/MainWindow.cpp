@@ -79,8 +79,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
   delete m_ui;
-
-//  qDeleteAll(m_plotList);
 }
 
 void MainWindow::addPlot()
@@ -98,8 +96,6 @@ void MainWindow::addPlot()
   std::string s = std::to_string(indice);
   char const *pchar = s.c_str();
   m_plotList.last()->addGeometry(m_geomList.last(), pchar);
-
-//  vtkDebugLeaks::PrintCurrentLeaks();
 }
 
 void MainWindow::removePlot()
@@ -113,7 +109,6 @@ void MainWindow::removePlot()
   m_plotList.last()->deleteLater();
   m_plotList.pop_back();
 
-//  vtkDebugLeaks::PrintCurrentLeaks();
 }
 
 void MainWindow::addGeometry()
@@ -133,7 +128,6 @@ void MainWindow::addGeometry()
 
   m_geomList.append(std::make_shared<Geometry>(center,fig,this));
 
-//  vtkDebugLeaks::PrintCurrentLeaks();
 }
 
 void MainWindow::removeGeometry()
@@ -159,7 +153,6 @@ void MainWindow::removeGeometry()
 
   m_plotList = newPlotList;
 
-//  vtkDebugLeaks::PrintCurrentLeaks();
 }
 
 void MainWindow::customEvent(QEvent* ev)
@@ -167,7 +160,6 @@ void MainWindow::customEvent(QEvent* ev)
   if( ev->type() == QEvent::User )
   {
     std::cout << "Event post Plot deletion." << std::endl;
-    //    vtkDebugLeaks::PrintCurrentLeaks();
   }
 }
 
@@ -202,20 +194,17 @@ void MainWindow::removeAllGeometries()
 
 void MainWindow::showAboutDialog()
 {
-//  AboutDialog* dialog = new AboutDialog();
   AboutDialog dialog;
   dialog.setModal(true);
   if( dialog.exec() == QDialog::Accepted )
   {
     std::cout << dialog.getLabelText().toStdString() << std::endl;
   }
-//  dialog->show();
 }
 
 void MainWindow::showTextline()
 {
-    //std::cout << m_ui->m_field1->text().toStdString() <<std::endl;
-    //m_ui->m_field1->setText("nope");
+
 }
 
 void MainWindow::addFig2Plot()
@@ -229,8 +218,8 @@ void MainWindow::addFig2Plot()
     int i;
     for( i = 0; i < 3; i++)
     {
-        std::cout << "Center" << std::endl;
-        std::cout << center[i] << std::endl;
+        QDebug()<< "Center";
+        QDebug()<< center[i];
     }
 
     m_geomList.append(std::make_shared<Geometry>(center,fig,this));
