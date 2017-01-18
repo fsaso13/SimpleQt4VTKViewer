@@ -111,7 +111,7 @@ vtkSmartPointer<vtkPolyData>Geometry::CreateGeometryData(
   }
   else if (figure == 1)
   {
-//  // Create a sphere
+    // Create a sphere
     vtkSmartPointer<vtkSphereSource> fsource =
     vtkSmartPointer<vtkSphereSource>::New();
     fsource->SetRadius(0.5);
@@ -123,7 +123,6 @@ vtkSmartPointer<vtkPolyData>Geometry::CreateGeometryData(
       vtkSmartPointer<vtkPolyData>::New();
 
     data->ShallowCopy(fsource->GetOutput());
-    std::cout << fsource->GetCenter() << std::endl;
     return data;
     }
   else if (figure == 2)
@@ -137,7 +136,6 @@ vtkSmartPointer<vtkPolyData>Geometry::CreateGeometryData(
     vtkSmartPointer<vtkPolyData> data =
       vtkSmartPointer<vtkPolyData>::New();
     data->ShallowCopy(fsource->GetOutput());
-    std::cout << fsource->GetCenter() << std::endl;
     return data;
   }
   else if (figure == 3)

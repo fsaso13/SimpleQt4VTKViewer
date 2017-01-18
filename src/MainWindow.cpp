@@ -26,6 +26,7 @@
 
 //Qt Includes
 #include <QHBoxLayout>
+#include <QDebug>
 
 //VTK Includes
 #include <vtkDebugLeaks.h>
@@ -218,8 +219,8 @@ void MainWindow::addFig2Plot()
     int i;
     for( i = 0; i < 3; i++)
     {
-        QDebug()<< "Center";
-        QDebug()<< center[i];
+        qDebug()<< "Center";
+        qDebug()<< center[i];
     }
 
     m_geomList.append(std::make_shared<Geometry>(center,fig,this));
